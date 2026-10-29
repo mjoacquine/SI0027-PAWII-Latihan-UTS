@@ -18,7 +18,68 @@
 const mongoose = require("mongoose");
 
 // TODO A1: buat schema subdocument gizi
-// TODO A2: buat menuSchema
-// TODO A3: export model dengan nama "Menu"
+const giziSchema = new mongoose.Schema(
+  {
+    kalori: {
+      type: Number,
+      required: [true, "Kalori wajib diisi"],
+      min: [0, "Kalori minimal 0"],
+      max: [5000, "Kalori maksimal 5000"]
+    },
+    protein: {
+      type: Number,
+      min: [0, "Protein tidak boleh negatif"],
+      default: 0
+    }
+  },
+  { _id: false } // Agar subdocument tidak memiliki _id sendiri
+);
 
-module.exports = {};
+// TODO A2: buat menuSchema
+const menuSchema = new mongoose.Schema({
+  nama: {
+    type: String,
+    required: [true, "Nama menu wajib diisi"],
+    trim: true // Membuang spasi di awal dan akhir string
+  },
+  kode: {
+    type: String,
+    required: [true, "Kode menu wajib diisi"],
+    unique: true, // Bersifat unik
+    match: [/^MN-\d{6}$/, "Format kode harus 'MN-' diikuti tepat 6 digit angka"]
+  },
+  bahan: {
+    type: [String],
+    validate: {
+      validator: function (v) {
+        return Array.isArray(v) && v.length > 0;
+      },
+      message: "Minimal harus ada 1 bahan"
+    }
+  },
+  gizi: {
+    type: giziSchema,
+    required: [true, "Data gizi wajib diisi"]
+  },
+  harga: {
+    type: Number,
+    required: [true, "Harga wajib diisi"],
+    min: [0, "Harga tidak boleh negatif"]
+  },
+  kantinId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Kantin", // Referencing ke model Kantin
+    required: [true, "Kantin ID wajib diisi"]
+  },
+  tersedia: {
+    type: Boolean,
+    default: true
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  }
+});
+
+// TODO A3: export model dengan nama "Menu"
+module.exports = mongoose.model("Menu", menuSchema);
