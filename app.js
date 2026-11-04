@@ -35,4 +35,4 @@ mongoose
   .catch((err) => {
     console.error("Gagal terhubung ke MongoDB:", err.message);
     process.exit(1);
-  });
+  }); 
