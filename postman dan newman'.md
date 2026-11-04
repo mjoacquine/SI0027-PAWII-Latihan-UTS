@@ -18,3 +18,9 @@ Di pojok kanan atas jendela Postman, klik dropdown yang bertuliskan *No Environm
 4. **Jalankan Collection Runner:** Pengujian Otomatis 28 Tes.
 Klik pada nama collection di sidebar kiri, lalu klik tombol **Run** untuk membuka *Collection Runner*. Di panel kanan, pastikan semua 28 request terpilih, lalu klik tombol **Run SI0027...**.
 *Verification:* Jendela hasil tes menampilkan status **Passed 55/55** (atau hijau semua) tanpa ada error.
+
+NEWMAN
+pm install -g newman
+
+newman run PAWII-Collection.json \
+  -e development.postman_environment.json
