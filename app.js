@@ -1,7 +1,4 @@
 // Latihan UTS PAW II - Menu Kantin Kampus (Starter)
-// Koneksi MongoDB, CORS, parser JSON, dan route /kantin sudah tersedia.
-// Lengkapi bagian bertanda TODO (lihat README.md bagian C dan D).
-
 require("express-async-errors");
 require("dotenv").config();
 const express = require("express");
@@ -14,7 +11,6 @@ const PORT = process.env.PORT || 3000;
 const kantinRoutes = require("./routes/kantinRoutes");
 // TODO C2: require route menu dari ./routes/menuRoutes
 const menuRoutes = require("./routes/menuRoutes");
-
 // TODO D2: require middleware errorHandler dari ./middlewares/errorHandler
 const errorHandler = require("./middlewares/errorHandler");
 
